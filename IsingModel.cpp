@@ -96,7 +96,7 @@ void IsingModel::InitializeLattice()
   if(order=="Ordered"){
     for(int x =0; x < NSpins; x++) {
       for (int y= 0; y < NSpins; y++){
-        SpinMatrix(x,y) = 1.0; // random spin orientation
+        SpinMatrix(x,y) = 1.0; // all spins up
         MagneticMoment +=  (double) SpinMatrix(x,y);
       }
     }
@@ -110,6 +110,7 @@ void IsingModel::InitializeLattice()
     }
   }
   else{
+    //Prints error message in terminal
     cout << "Wrong Ordered/Unordered" << endl;
     exit(1);
   }

@@ -1,7 +1,7 @@
 CPPflags=  clang++ -Xpreprocessor -fopenmp -std=c++14 -Rpass=loop-vectorize
 LIB = -larmadillo -llapack -lblas -lomp
 
-CONDITIONS = Lattice 2 1000000 1.0 1.1 0.1 Ordered
+CONDITIONS = Lattice 60 1000000 2.0 2.3 0.01 Ordered
 
 all: compile execute
 
@@ -11,3 +11,4 @@ compile:
 execute:
 	./main.out ${CONDITIONS}
 	#python3 Energy_print.py ${CONDITIONS}
+	#python3 prob_calc.py ${CONDITIONS}

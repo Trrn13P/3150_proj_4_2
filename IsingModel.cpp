@@ -1,18 +1,3 @@
-/*
-   Program to solve the two-dimensional Ising model
-   with zero external field and no parallelization
-   The coupling constant J is set to J = 1
-   Boltzmann's constant = 1, temperature has thus dimension energy
-   Metropolis aolgorithm  is used as well as periodic boundary conditions.
-   The code needs an output file on the command line and the variables mcs, nspins,
-   initial temp, final temp and temp step.
-   Run as
-   ./executable Outputfile numberof spins number of MC cycles initial temp final temp tempstep
-   ./test.x Lattice 100 10000000 2.1 2.4 0.01
-   Compile and link as
-   c++ -O3 -std=c++11 -Rpass=loop-vectorize -o Ising.x IsingModel.cpp -larmadillo
-*/
-
 #include "IsingModel.hpp"
 #include <cmath>
 #include <iostream>
@@ -59,7 +44,7 @@ void IsingModel::MetropolisSampling()
   std::uniform_real_distribution<double> RandomNumberGenerator(0.0,1.0);
 
 
-  // initialize array for expectation values
+  // initialize SpinMatrix
   InitializeLattice();
   // Start Monte Carlo cycles
   for (int cycles = 1; cycles <= MCcycles; cycles++){
@@ -73,6 +58,7 @@ void IsingModel::MetropolisSampling()
 	   SpinMatrix(PeriodicBoundary(ix,NSpins,-1),iy) +
 	   SpinMatrix(ix,PeriodicBoundary(iy,NSpins,1)) +
 	   SpinMatrix(PeriodicBoundary(ix,NSpins,1),iy));
+     //Metropolis test
 	if ( RandomNumberGenerator(gen) <= EnergyDifference(deltaE+8) ) {
 	  SpinMatrix(ix,iy) *= -1.0;  // flip one spin and accept new spin config
 	  MagneticMoment += (double) 2*SpinMatrix(ix,iy);
@@ -91,8 +77,8 @@ void IsingModel::MetropolisSampling()
 // function to initialise energy, spin matrix and magnetization
 void IsingModel::InitializeLattice()
 {
-
   // setup spin matrix and initial magnetization
+  //order is argv[7]
   if(order=="Ordered"){
     for(int x =0; x < NSpins; x++) {
       for (int y= 0; y < NSpins; y++){
@@ -110,11 +96,10 @@ void IsingModel::InitializeLattice()
     }
   }
   else{
-    //Prints error message in terminal
+    //Prints error message in terminal if provided bad argv[7]
     cout << "Wrong Ordered/Unordered" << endl;
     exit(1);
   }
-
 
   // setup initial energy
   for(int x =0; x < NSpins; x++) {
@@ -127,7 +112,7 @@ void IsingModel::InitializeLattice()
 }// end function initialise
 
 
-
+//Not changed from Morten's program, writes expectation values to file.
 void IsingModel::WriteResultstoFile(ofstream &ofile)
 {
   double norm = 1.0/((double) (MCcycles));  // divided by  number of cycles
@@ -149,6 +134,9 @@ void IsingModel::WriteResultstoFile(ofstream &ofile)
 } // end output function
 
 
+//This function is almost identical to the MetropolisSampling function except
+//it doesn't save expectation values, but instead saves MagneticMoment, # of flips and Energy
+//for each MC-cycle.
 void IsingModel::Get_Energy()
 {
   // Initialize the seed and call the Mersienne algo
@@ -158,7 +146,7 @@ void IsingModel::Get_Energy()
   std::uniform_real_distribution<double> RandomNumberGenerator(0.0,1.0);
 
 
-  // initialize array for expectation values
+  // initialize SpinMatrix
   InitializeLattice();
   Energy_vector(0) = Energy;
   MagneticMoment_vector(0) = MagneticMoment;

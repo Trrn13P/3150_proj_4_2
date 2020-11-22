@@ -15,7 +15,7 @@ try:
 except:
     print("Error")
     sys.exit(1)
-infile = open("./textfiles/"+filename,"r")
+infile = open("../textfiles/"+filename,"r")
 
 first_line = infile.readline().split()
 infile.readline()
@@ -66,7 +66,7 @@ def flips():
 
 #function for saving the plot
 def save_plot(type):
-    pic_filename = "./figs/d/T=" + str(T) + "_" + str(order) + "_" + str(type) + "_L" + str(int(np.sqrt(N))) + ".png"
+    pic_filename = "../figs/d/T=" + str(T) + "_" + str(order) + "_" + str(type) + "_L" + str(int(np.sqrt(N))) + ".png"
     plt.savefig(pic_filename)
     plt.clf()
 

@@ -10,7 +10,7 @@ except:
     print("Error")
     sys.exit(1)
 
-infile = open("./textfiles/"+filename,"r")
+infile = open("../textfiles/"+filename,"r")
 
 first_line = infile.readline().split()
 infile.readline()
@@ -82,6 +82,5 @@ f = np.asarray(f)
 print(variance)
 plt.plot(energy_vec,f, label="PDF")
 plt.legend()
-plt.savefig("./figs/e/T="+str(T)+".png")
-#plt.show()
+plt.savefig("../figs/e/T="+str(T)+".png")
 plt.clf()

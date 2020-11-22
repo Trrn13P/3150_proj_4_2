@@ -1,7 +1,7 @@
 CPPflags=  clang++ -Xpreprocessor -fopenmp -std=c++14 -Rpass=loop-vectorize
 LIB = -larmadillo -llapack -lblas -lomp
 
-CONDITIONS = Lattice 60 1000000 2.0 2.3 0.01 Ordered
+CONDITIONS = Lattice 5 100000 2.0 2.3 0.1 Ordered
 
 all: compile execute
 

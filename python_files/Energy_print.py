@@ -9,7 +9,7 @@ Second line-> Energy-vector: MagnetcMoment-vector: Number of flips:
 Third to last-> Energy-value MagneticMoment-value Flip-value
 """
 
-#Getting filename from the makefile or terminal
+#Getting filename from the makefile or terminal, same argvs as the c++ main.cpp
 try:
     filename = str(sys.argv[1]) + str(sys.argv[2])
 except:

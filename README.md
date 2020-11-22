@@ -1,6 +1,6 @@
 # FYS3150 Project 4
 
-To run the program, go into the directory of the makefile and write make all.
+To run the program, go into the directory of the makefile and write "make all" in the terminal.
 
 The project is mainly run in the makefile. There is a line called CONDITIONS which you can change to make the program do different things. The first argument can be "Lattice", "Energy" or "parallelization_test". If Lattice it will save the expectation values for a given lattice to file called LatticeXX. If Energy it will save the energy, magnetization and # of flops to file called EnergyXX. And If parallelization_test it will save the time used for 10 runs of N MCcycles parallelized and unparallelized to a file called parallelization_testXX.
 

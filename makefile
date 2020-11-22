@@ -10,5 +10,7 @@ compile:
 
 execute:
 	./main.out ${CONDITIONS}
-	#python3 Energy_print.py ${CONDITIONS}
-	#python3 prob_calc.py ${CONDITIONS}
+	#python3 ./python_files/Energy_print.py ${CONDITIONS}
+	#python3 ./python_files/prob_calc.py ${CONDITIONS}
+	#python3 ./python_files/paralleization_analysation
+	#python3 ./python_files/lattice_reader.py
